@@ -1,3 +1,18 @@
+import neuralops
+import os
+from dotenv import load_dotenv
+
+# Load variables from .env into os.environ
+load_dotenv()
+
+#  Initialize NeuralOps FIRST
+neuralops.init(
+    api_key=os.environ.get("NEURALOPS_API_KEY", "test-api-key"),
+    service_name="fastapi-testbed",
+    environment="development",
+)
+
+
 from fastapi import FastAPI
 import logging
 from app.core.config import setup_logging
