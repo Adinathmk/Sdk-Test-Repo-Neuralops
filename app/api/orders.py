@@ -22,6 +22,10 @@ def get_order(order_id: str):
     logger.info(f"Received GET /orders/{order_id} request")
     
     order = order_service.fetch_order(order_id)
+
+    if order is None:
+        logger.warning(f"Order {order_id} not found.")
+        raise HTTPException(status_code=404, detail=f"Order {order_id} not found")
     
     # This will crash with AttributeError because order is None
     logger.info("Order retrieved, mapping to response...")
