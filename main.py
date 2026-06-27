@@ -8,6 +8,7 @@ load_dotenv()
 #  Initialize NeuralOps FIRST
 neuralops.init(
     api_key=os.environ.get("NEURALOPS_API_KEY", "test-api-key"),
+    ingest_url="http://localhost/api/v1/ingest/logs", 
     service_name="fastapi-testbed",
     environment="development",
 )
