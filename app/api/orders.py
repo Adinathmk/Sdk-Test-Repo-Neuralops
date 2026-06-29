@@ -23,11 +23,14 @@ def get_order(order_id: str):
     
     order = order_service.fetch_order(order_id)
     
-    # This will crash with AttributeError because order is None
+    if order is None:
+        logger.warning(f"Order with ID {order_id} not found.")
+        raise HTTPException(status_code=404, detail=f"Order with ID {order_id} not found")
+
     logger.info("Order retrieved, mapping to response...")
     response = OrderResponse(
         order_id=order_id,
-        total_amount=order.total_amount, # Crashes here
+        total_amount=order.total_amount,
         status=order.status
     )
     return response
