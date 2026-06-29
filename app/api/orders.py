@@ -1,4 +1,4 @@
-from fastapi import APIRouter, BackgroundTasks
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 import logging
 import uuid
 from app.schemas.order import OrderCheckoutRequest, OrderResponse
@@ -23,6 +23,10 @@ def get_order(order_id: str):
     
     order = order_service.fetch_order(order_id)
     
+    if order is None:
+        logger.warning(f"Order with ID {order_id} not found.")
+        raise HTTPException(status_code=404, detail="Order not found")
+        
     # This will crash with AttributeError because order is None
     logger.info("Order retrieved, mapping to response...")
     response = OrderResponse(
