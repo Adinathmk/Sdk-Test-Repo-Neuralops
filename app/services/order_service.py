@@ -13,7 +13,7 @@ def process_checkout(customer_id: str, items: list) -> float:
     
     # Intentional Bug 1: Division by Zero
     logger.info("Calculating tax with rate from config...")
-    tax_rate_divisor = 0
+    tax_rate_divisor = 100
     
     
     # Let's crash on a new line
