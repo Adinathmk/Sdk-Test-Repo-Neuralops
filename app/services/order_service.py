@@ -38,4 +38,4 @@ async def sync_order_to_warehouse(order_id: str):
     
     # Intentional Bug 3: Async Unhandled Exception
     logger.info("Sync failed during data transfer.")
-    raise RuntimeError("Database connection lost")
+
